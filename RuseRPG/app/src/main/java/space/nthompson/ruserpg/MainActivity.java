@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
                 startActivity(intent); //launch activity if oAuth is successful
+                finish();
             }
 
             @Override

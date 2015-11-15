@@ -17,7 +17,6 @@ import com.twitter.sdk.android.Twitter;
 
 public class Dashboard extends AppCompatActivity {
 
-    Toolbar actionToolbar;
     Context context = this;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP) //Target Lollipop devices. Toolbar set as actionbar is deprecated < API 21
@@ -27,10 +26,9 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
 
-        actionToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar actionToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        actionToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
 
     }
 
@@ -80,13 +78,9 @@ public class Dashboard extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    // A method to find height of the status bar
-    public int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
+    @Override
+    public void onBackPressed(){
+        finish();
     }
+
 }

@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/my_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
     android:background="@color/primaryColor"
-    android:elevation="4dp"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Level"
+        android:id="@+id/levelView" />
 
 
 </android.support.v7.widget.Toolbar>

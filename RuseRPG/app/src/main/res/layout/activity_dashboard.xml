@@ -17,12 +17,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="170dp"
             android:layout_height="fill_parent">
 
-        </LinearLayout>
+            <ImageView
+                android:layout_width="73dp"
+                android:layout_height="73dp"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:src="@mipmap/ic_launcher" />
+        </RelativeLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -149,7 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton android:id="@+id/ib"
+        <ImageButton android:id="@+id/workoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -158,15 +166,9 @@
             android:layout_marginRight="44dp"
             android:layout_marginEnd="44dp"
             android:layout_marginBottom="48dp"
-            android:src="@mipmap/ic_add_circle_outline_black_24dp" />
+            android:src="@mipmap/ic_add_circle_outline_black_24dp"
+            android:clickable="true" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 </LinearLayout>

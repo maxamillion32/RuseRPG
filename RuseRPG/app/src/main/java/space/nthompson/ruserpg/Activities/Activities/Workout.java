@@ -2,12 +2,13 @@ package space.nthompson.ruserpg.Activities.Activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import space.nthompson.ruserpg.R;
 
-public class Workout extends ActionBarActivity {
+public class Workout extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

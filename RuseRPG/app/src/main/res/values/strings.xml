@@ -10,5 +10,6 @@
     <string name="char_level">Charisma</string>
     <string name="luck_level">Luck</string>
     <string name="action_logout">Logout</string>
+    <string name="title_activity_workout">Workout</string>
 
 </resources>

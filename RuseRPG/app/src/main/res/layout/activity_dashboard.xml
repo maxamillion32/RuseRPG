@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondaryColor"
-    tools:context="space.nthompson.ruserpg.Dashboard"
+    tools:context="space.nthompson.ruserpg.Activities.Activities.Dashboard"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp">
@@ -77,7 +77,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp">
@@ -99,7 +99,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp">
@@ -121,7 +121,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp">
@@ -159,6 +159,14 @@
             android:layout_marginEnd="44dp"
             android:layout_marginBottom="48dp"
             android:src="@mipmap/ic_add_circle_outline_black_24dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,13 +1,13 @@
-package space.nthompson.ruserpg;
+package space.nthompson.ruserpg.Activities.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.ImageView;
+
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -15,8 +15,15 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.twitter.sdk.android.core.models.User;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import io.fabric.sdk.android.Fabric;
+import space.nthompson.ruserpg.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +69,5 @@ public class MainActivity extends AppCompatActivity {
         // Activity that it triggered.
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
-
 
 }

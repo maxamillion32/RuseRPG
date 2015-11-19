@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.Activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +24,12 @@
             android:value="02e8e994c22a10c6a08b5e9e9d9192a7cbef708a" />
 
         <activity
-            android:name=".Dashboard"
+            android:name=".Activities.Activities.Dashboard"
             android:label="@string/title_activity_dashboard" >
+        </activity>
+        <activity
+            android:name=".Activities.Activities.Workout"
+            android:label="@string/title_activity_workout" >
         </activity>
     </application>
 

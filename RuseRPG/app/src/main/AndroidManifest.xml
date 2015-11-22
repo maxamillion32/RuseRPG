@@ -28,8 +28,12 @@
             android:label="@string/title_activity_dashboard" >
         </activity>
         <activity
-            android:name=".Activities.Activities.Workout"
+            android:name=".Activities.Activities.WorkoutActivity"
             android:label="@string/title_activity_workout" >
+        </activity>
+        <activity
+            android:name=".Activities.Activities.ExerciseActivity"
+            android:label="@string/title_activity_exercise" >
         </activity>
     </application>
 

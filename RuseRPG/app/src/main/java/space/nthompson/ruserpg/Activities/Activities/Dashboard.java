@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +14,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.models.User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,29 +30,28 @@ import space.nthompson.ruserpg.R;
 public class Dashboard extends AppCompatActivity{
 
     Context context = this;
-    private Bitmap bm;
-    private ImageView profile_photo;
     private ImageButton workoutBtn;
+    private ImageView profile_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         //set toolbar as the acting action bar
         Toolbar actionToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Intent intent = getIntent();
+        String photoUrl = intent.getStringExtra("key");
 
-        //Twitter API call to get user data (name, email, photo)
-        twitterAPI();
+        new BackgroundUIProcesses().execute(photoUrl);
 
         //Launch workout screen from 'add' button
         workoutBtn = (ImageButton) findViewById(R.id.workoutBtn);
-        workoutBtn.setOnClickListener(new View.OnClickListener(){
+        workoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, Workout.class);
+                Intent intent = new Intent(Dashboard.this, WorkoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,33 +82,6 @@ public class Dashboard extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void twitterAPI(){
-        Twitter.getApiClient().getAccountService().verifyCredentials(true, false, new Callback<User>() {
-            @Override
-            public void success(Result<User> userResult) {
-                User user = userResult.data; //retrieve Twitter user
-                String name = userResult.data.name; //retrieve Twitter user name
-                String email = userResult.data.email; //retrieve Twitter user email
-
-                //Retrieve profile photo URL's of various sizes for use
-               // String photoUrlNormalSize = userResult.data.profileImageUrl;
-                String photoUrlBiggerSize = userResult.data.profileImageUrl.replace("_normal", "_bigger");
-               // String photoUrlMiniSize = userResult.data.profileImageUrl.replace("_normal", "_mini");
-                String photoUrlOriginalSize = userResult.data.profileImageUrl.replace("_normal", "");
-                System.out.println(photoUrlBiggerSize);
-                //Start background Async process to handle modifying the UI thread from main
-                new BackgroundUIProcesses().execute(photoUrlBiggerSize);
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-            }
-        });
-    }
-
-
-
 
     //Function to close app rather than move down stack when back button is pressed from this activity
     @Override
@@ -150,7 +115,7 @@ public class Dashboard extends AppCompatActivity{
         return true;
     }
 
-    private class BackgroundUIProcesses extends AsyncTask<String, Void, Bitmap>{
+    private class BackgroundUIProcesses extends AsyncTask<String, Void, Bitmap> {
 
         @Override
         protected Bitmap doInBackground(String... params) {
@@ -180,5 +145,4 @@ public class Dashboard extends AppCompatActivity{
 
         }
     }
-
 }

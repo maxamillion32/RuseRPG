@@ -15,6 +15,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.User;
 
 import io.fabric.sdk.android.Fabric;
+
 import space.nthompson.ruserpg.R;
 
 
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void twitterAPI(){
         Twitter.getApiClient().getAccountService().verifyCredentials(true, false, new Callback<User>() {
+
             @Override
             public void success(Result<User> userResult) {
                 User user = userResult.data; //retrieve Twitter user

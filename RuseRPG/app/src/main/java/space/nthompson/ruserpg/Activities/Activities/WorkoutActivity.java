@@ -20,6 +20,7 @@ public class WorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+
         exerciseBtn = (Button) findViewById(R.id.exerciseBtn);
         exerciseBtn.setOnClickListener(new View.OnClickListener() {
             @Override

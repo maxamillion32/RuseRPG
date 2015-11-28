@@ -21,6 +21,7 @@ import android.util.Log;
 
 public class JSONfunctions {
 
+
     public static JSONArray getJSONfromURL(String url) {
         InputStream is = null;
         String result = "";

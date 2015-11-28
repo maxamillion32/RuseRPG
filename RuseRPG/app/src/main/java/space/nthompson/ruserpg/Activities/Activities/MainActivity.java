@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 //Twitter API call to get user data (name, email, photo)
                 //will launch Dashboard from there.
                 twitterAPI();
-                finish();
+               // finish();
             }
 
             @Override
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = userResult.data; //retrieve Twitter user
                 String name = userResult.data.name; //retrieve Twitter user name
                 String email = userResult.data.email; //retrieve Twitter user email
+                long userID = userResult.data.id;
 
                 //Retrieve profile photo URL's of various sizes for use
                 // String photoUrlNormalSize = userResult.data.profileImageUrl;
@@ -83,13 +84,19 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(photoUrlBiggerSize);
 
                 intent.setClass(getApplicationContext(), Dashboard.class); //set class for intent
-                intent.putExtra("key", photoUrlBiggerSize); //pass along retrieved photo url to Dashboard
+                intent.putExtra("photo", photoUrlBiggerSize); //pass along retrieved photo url to Dashboard
+                intent.putExtra("id", String.valueOf(userID));
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+
 
                 startActivity(intent); //launch activity
+                finish();
             }
 
             @Override
             public void failure(TwitterException e) {
+                e.printStackTrace();
             }
         });
     }

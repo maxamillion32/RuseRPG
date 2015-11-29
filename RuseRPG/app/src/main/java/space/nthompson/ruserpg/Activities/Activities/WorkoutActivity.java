@@ -1,34 +1,67 @@
 package space.nthompson.ruserpg.Activities.Activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import space.nthompson.ruserpg.R;
 
 public class WorkoutActivity extends AppCompatActivity {
+
+    Context context = this;
 
     private Button exerciseBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+        Intent intent = getIntent();
+        final String workoutID = intent.getStringExtra("workout_id");
+        final String twitterID = intent.getStringExtra("twitterID");
+        final String workoutDateTime = intent.getStringExtra("dateTime");
 
-        exerciseBtn = (Button) findViewById(R.id.exerciseBtn);
+        exerciseBtn = (Button) findViewById(R.id.buttonAdd);
         exerciseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WorkoutActivity.this, ExerciseActivity.class);
-                startActivity(intent);
+                addExerciseDialog(twitterID, workoutDateTime, workoutID);
             }
         });
+    }
+
+    public boolean addExerciseDialog(final String twitterID, final String dateTime, final String workout_id){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(context)
+                .setTitle("Choose Exercise Type")
+                .setCancelable(true)
+                .setNegativeButton("Cardio", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(WorkoutActivity.this, CardioActivity.class);
+                        intent.putExtra("twitterID", twitterID);
+                        intent.putExtra("dateTime", dateTime);
+                        intent.putExtra("workout_id", workout_id);
+                        startActivity(intent);
+                    }
+                })
+                .setPositiveButton("Strength", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(WorkoutActivity.this, StrengthActivity.class);
+                        intent.putExtra("twitterID", twitterID);
+                        intent.putExtra("dateTime", dateTime);
+                        intent.putExtra("workout_id", workout_id);
+                        startActivity(intent);
+                    }
+                });
+        dialog.create().show();
+        return true;
     }
 
     @Override

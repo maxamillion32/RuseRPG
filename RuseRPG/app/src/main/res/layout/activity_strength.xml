@@ -48,8 +48,10 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="youtube url"
+                        android:text="@string/youtube_URL"
                         android:id="@+id/youtubeURL"
+                    android:autoLink="web"
+                    android:linksClickable="true"
                     android:textSize="20dp"
                     android:layout_alignBottom="@+id/spinner"
                     android:layout_toRightOf="@+id/spinner"
@@ -61,7 +63,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="fill_parent"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:paddingTop="4dp">
@@ -71,6 +73,13 @@
                 android:layout_height="match_parent"
 
                 layout="@layout/strength_set_cardview" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:id="@+id/saveStrgthBtn"
+                android:layout_gravity="right" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -11,9 +11,11 @@
     <string name="luck_level">Luck</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_workout">Workout</string>
-    <string name="title_activity_exercise">ExerciseActivity</string>
+    <string name="title_activity_strength">StrengthActivity</string>
     <string name="email_address">Email Address</string>
     <string name="exercise_set">Set</string>
     <string name="exercise_reps">Reps</string>
+    <string name="title_activity_cardio">CardioActivity</string>
+    <string name="youtube_URL">Youtube URL</string>
 
 </resources>

@@ -1,50 +1,112 @@
 package space.nthompson.ruserpg.Activities.Activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import space.nthompson.ruserpg.R;
 
-public class ExerciseActivity extends AppCompatActivity {
+public class StrengthActivity extends AppCompatActivity {
     JSONObject jsonObject;
     JSONArray jsonArray;
 
     ArrayList<String> strengthList;
     ArrayList<Strength> strength;
 
-    ArrayList<String> cardioList;
-    ArrayList<Cardio> cardio;
 
     String strengthURL = "http://ruse-api.herokuapp.com/lookupstrength";
-    String cardioURL = "http://ruse-api.herokuapp.com/lookupcardio";
+    String strengthPOSTURL = "http://ruse-api.herokuapp.com/postStrength";
 
+    Button strengthBtn;
+    EditText repTotal;
+
+    String strengthID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise);
+        setContentView(R.layout.activity_strength);
         //set toolbar as the acting action bar
         Toolbar actionToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(actionToolbar);
         getSupportActionBar().setTitle("Add Strength");
+
+        Intent intent = getIntent();
+        final String workoutID = intent.getStringExtra("workout_id");
+        final String twitterID = intent.getStringExtra("twitterID");
+        String workoutDateTime = intent.getStringExtra("dateTime");
+
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         new parseStengthAPI().execute();
+
+        strengthBtn = (Button) findViewById(R.id.saveStrgthBtn);
+        strengthBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                repTotal = (EditText) findViewById(R.id.rep_count);
+                final String rep_total = repTotal.toString();
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //code to do the HTTP request
+                        OkHttpClient client = new OkHttpClient();
+                        RequestBody formBody = new FormEncodingBuilder()
+                                .add("reps", rep_total)
+                                .add("fk_workout_id", workoutID)
+                                .add("fk_workout_user_id", twitterID)
+                                .add("fk_lookupstrength_id", strengthID)
+                                .build();
+                        System.out.println(strengthID);
+                        Request request = new Request.Builder()
+                                .url("http://ruse-api.herokuapp.com/postCardio")
+                                .post(formBody)
+                                .build();
+                        Response response = null;
+                        try {
+                            response = client.newCall(request).execute();
+                            if (!response.isSuccessful())
+                                throw new IOException("Unexpected code " + response);
+                            //  System.out.println(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Intent intent = new Intent(StrengthActivity.this, WorkoutActivity.class);
+                        startActivity(intent);
+                    }
+
+                });
+                thread.start();
+
+            }
+        });
+
+
     }
 
     @Override
@@ -98,7 +160,7 @@ public class ExerciseActivity extends AppCompatActivity {
         protected void onPostExecute(Void args){
             Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
             //spinner adapter
-            mySpinner.setAdapter(new ArrayAdapter<String>(ExerciseActivity.this, android.R.layout.simple_spinner_dropdown_item, strengthList));
+            mySpinner.setAdapter(new ArrayAdapter<String>(StrengthActivity.this, android.R.layout.simple_spinner_dropdown_item, strengthList));
             //spinner on item click listener
             mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -106,7 +168,10 @@ public class ExerciseActivity extends AppCompatActivity {
                     TextView txtName = (TextView) findViewById(R.id.name);
                     TextView txtURL = (TextView) findViewById(R.id.youtubeURL);
                     txtName.setText(strength.get(i).getStrengthName());
-                    txtURL.setText(strength.get(i).getYouTubeURL());
+                    txtURL.setText(
+                            Html.fromHtml(
+                                    "<a href=" + strength.get(i).getYouTubeURL() + ">Youtube URL</a> "));
+                    strengthID = String.valueOf(i);
                 }
 
                 @Override

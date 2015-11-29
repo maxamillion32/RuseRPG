@@ -32,8 +32,12 @@
             android:label="@string/title_activity_workout" >
         </activity>
         <activity
-            android:name=".Activities.Activities.ExerciseActivity"
-            android:label="@string/title_activity_exercise" >
+            android:name=".Activities.Activities.StrengthActivity"
+            android:label="@string/title_activity_strength" >
+        </activity>
+        <activity
+            android:name=".Activities.Activities.CardioActivity"
+            android:label="@string/title_activity_cardio" >
         </activity>
     </application>
 

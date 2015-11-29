@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,9 @@ import java.io.InputStream;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -58,7 +61,7 @@ public class Dashboard extends AppCompatActivity{
 
         Intent intent = getIntent();
         String photoUrl = intent.getStringExtra("photo");
-        String userTwitterID = intent.getStringExtra("id");
+        final String userTwitterID = intent.getStringExtra("id");
         String userName = intent.getStringExtra("name");
         String userEmail = intent.getStringExtra("email");
 
@@ -76,8 +79,40 @@ public class Dashboard extends AppCompatActivity{
         workoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, WorkoutActivity.class);
-                startActivity(intent);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                final String currentDateandTime = sdf.format(new Date());
+                final String workoutID = new StringBuilder().append(currentDateandTime).append(userTwitterID).toString();
+                Thread thread = new Thread(new Runnable(){
+                    @Override
+                    public void run(){
+                        //code to do the HTTP request
+                        OkHttpClient client = new OkHttpClient();
+                        RequestBody formBody = new FormEncodingBuilder()
+                                .add("workout_id", workoutID)
+                                .add("fk_user_id", userTwitterID)
+                                .build();
+                        Request request = new Request.Builder()
+                                .url("http://ruse-api.herokuapp.com/postWorkout")
+                                .post(formBody)
+                                .build();
+                        Response response = null;
+                        try {
+                            response = client.newCall(request).execute();
+                            if(!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                            //  System.out.println(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent intent = new Intent(Dashboard.this, WorkoutActivity.class);
+                        intent.putExtra("twitterID", userTwitterID);
+                        intent.putExtra("dateTime", currentDateandTime);
+                        intent.putExtra("workout_id", workoutID);
+                        startActivity(intent);
+                    }
+                });
+                thread.start();
+
             }
         });
 

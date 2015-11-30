@@ -18,6 +18,7 @@ public class WorkoutActivity extends AppCompatActivity {
     Context context = this;
 
     private Button exerciseBtn;
+    private Button saveWorkoutBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,9 @@ public class WorkoutActivity extends AppCompatActivity {
         final String twitterID = intent.getStringExtra("twitterID");
         final String workoutDateTime = intent.getStringExtra("dateTime");
 
+        saveWorkoutBtn = (Button) findViewById(R.id.saveWorkoutButton);
+        saveWorkoutBtn.setVisibility(View.GONE);
+
         exerciseBtn = (Button) findViewById(R.id.buttonAdd);
         exerciseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +38,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 addExerciseDialog(twitterID, workoutDateTime, workoutID);
             }
         });
+        
     }
 
     public boolean addExerciseDialog(final String twitterID, final String dateTime, final String workout_id){

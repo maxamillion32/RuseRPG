@@ -51,6 +51,8 @@ public class CardioActivity extends AppCompatActivity {
     EditText cardioTime;
     String cardioID;
 
+    Boolean changesMade = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class CardioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 cardioTime = (EditText) findViewById(R.id.cardioTimeText);
                 final String rep_total = cardioTime.toString();
+                changesMade = true;
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -106,6 +109,7 @@ public class CardioActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         Intent intent = new Intent(CardioActivity.this, WorkoutActivity.class);
+                        intent.putExtra("changes", changesMade);
                         startActivity(intent);
                     }
 

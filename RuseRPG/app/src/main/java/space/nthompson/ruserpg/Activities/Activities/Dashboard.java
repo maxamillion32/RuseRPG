@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -39,8 +37,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
-
 
 import space.nthompson.ruserpg.R;
 
@@ -219,6 +215,7 @@ public class Dashboard extends AppCompatActivity{
                 String jsonData = response.body().string();
                 JSONArray jsonArray = new JSONArray(jsonData);
                 for(int i = 0; i < jsonArray.length(); i++){
+
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     totalScore = jsonObject.getInt("totalScore");
                     strengthScore = jsonObject.getInt("strength");
@@ -237,6 +234,10 @@ public class Dashboard extends AppCompatActivity{
         }
         @Override
         protected void onPostExecute(Void args){
+
+            TextView txtTotalScore = (TextView) findViewById(R.id.totalScoreValue);
+            txtTotalScore.setText(totalScore.toString());
+
             TextView txtStrength = (TextView) findViewById(R.id.str_num);
             txtStrength.setText(strengthScore.toString());
 

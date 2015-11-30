@@ -4,11 +4,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_dashboard">Dashboard</string>
-    <string name="stength_level">Strength</string>
-    <string name="endurance_level">Endurance</string>
-    <string name="agility_level">Agility</string>
-    <string name="char_level">Charisma</string>
-    <string name="luck_level">Luck</string>
+    <string name="stength_level">Strength:</string>
+    <string name="endurance_level">Endurance:</string>
+    <string name="agility_level">Agility:</string>
+    <string name="char_level">Charisma:</string>
+    <string name="luck_level">Luck:</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_workout">Workout</string>
     <string name="title_activity_strength">StrengthActivity</string>
@@ -17,5 +17,8 @@
     <string name="exercise_reps">Reps</string>
     <string name="title_activity_cardio">CardioActivity</string>
     <string name="youtube_URL">Youtube URL</string>
+    <string name="ruseSplash">RuseRPG</string>
+    <string name="totalScoreTxtView">Total Score:</string>
+    <string name="totalScoreValue">000</string>
 
 </resources>

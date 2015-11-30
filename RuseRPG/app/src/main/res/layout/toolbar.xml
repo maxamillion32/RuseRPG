@@ -7,11 +7,29 @@
     android:minHeight="?attr/actionBarSize"
     android:background="@color/primaryColor"
     >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/levelView" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+
+    <space.nthompson.ruserpg.Activities.Activities.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalScoreTxtView"
+        android:textSize="20dp"
+        android:text="@string/totalScoreTxtView"/>
+
+    <space.nthompson.ruserpg.Activities.Activities.MyTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalScoreValue"
+        android:textSize="20dp"
+        android:layout_marginLeft="79dp"
+        android:text="@string/totalScoreValue"
+        android:layout_marginStart="79dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/totalScoreTxtView"
+        android:layout_toEndOf="@+id/totalScoreTxtView" />
+</RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

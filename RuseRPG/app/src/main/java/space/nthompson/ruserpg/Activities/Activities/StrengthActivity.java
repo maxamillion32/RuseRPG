@@ -84,7 +84,7 @@ public class StrengthActivity extends AppCompatActivity {
                                 .build();
                         System.out.println(strengthID);
                         Request request = new Request.Builder()
-                                .url("http://ruse-api.herokuapp.com/postCardio")
+                                .url("http://ruse-api.herokuapp.com/postStrength")
                                 .post(formBody)
                                 .build();
                         Response response = null;
